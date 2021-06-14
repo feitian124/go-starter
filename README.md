@@ -61,6 +61,7 @@ Run `make help` to get a list of available targets.
 - [Embedding static files in a go binary using go embed](https://harsimranmaan.medium.com/embedding-static-files-in-a-go-binary-using-go-embed-bac505f3cb9a)
 
 ### project structure
-https://github.com/katzien/go-structure-examples
-https://github.com/thockin/go-build-template
-https://github.com/1024casts/snake
+- https://github.com/golang-standards/project-layout.git
+- https://github.com/katzien/go-structure-examples
+- https://github.com/thockin/go-build-template
+- https://github.com/1024casts/snake

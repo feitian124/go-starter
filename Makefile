@@ -174,7 +174,7 @@ $(foreach bin,$(BINS),$(eval $(strip                                 \
     .container-$(subst /,_,$(REGISTRY)/$(bin))-$(TAG): BIN = $(bin)  \
 )))
 $(foreach bin,$(BINS),$(eval                                         \
-    .container-$(subst /,_,$(REGISTRY)/$(bin))-$(TAG): bin/$(OS)_$(ARCH)/$(bin)$(BIN_EXTENSION) Dockerfile.in  \
+    .container-$(subst /,_,$(REGISTRY)/$(bin))-$(TAG): bin/$(OS)_$(ARCH)/$(bin)$(BIN_EXTENSION) build/package/Dockerfile.in  \
 ))
 # This is the target definition for all container-dotfiles.
 # These are used to track build state in hidden files.
@@ -184,7 +184,7 @@ $(CONTAINER_DOTFILES):
 	    -e 's|{ARG_ARCH}|$(ARCH)|g'               \
 	    -e 's|{ARG_OS}|$(OS)|g'                   \
 	    -e 's|{ARG_FROM}|$(BASEIMAGE)|g'          \
-	    Dockerfile.in > .dockerfile-$(BIN)-$(OS)_$(ARCH)
+	    build/package/Dockerfile.in > .dockerfile-$(BIN)-$(OS)_$(ARCH)
 	@docker build -t $(REGISTRY)/$(BIN):$(TAG) -f .dockerfile-$(BIN)-$(OS)_$(ARCH) .
 	@docker images -q $(REGISTRY)/$(BIN):$(TAG) > $@
 	@echo
