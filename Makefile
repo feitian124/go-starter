@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # The binaries to build (just the basenames).
-BINS := myapp-1 myapp-2
+BINS := app demo
 
 # Where to push the docker image.
 REGISTRY ?= example.com
