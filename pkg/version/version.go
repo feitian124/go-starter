@@ -18,4 +18,4 @@ package version
 
 // Version is the app-global version string, which should be substituted with a
 // real value during build.
-var Version = "UNKNOWN"
+var Version = "0.0.1"
