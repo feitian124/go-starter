@@ -44,6 +44,6 @@ vendor
 
 # custom
 snake
-go-embed
+go-starter
 config/config.yaml
 

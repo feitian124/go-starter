@@ -1,12 +1,14 @@
 # go-starter
 
+[英文](README.md) | 中文
+
 This is a skeleton project for a go application, espeically web application, which captures the best practise including:
 
 - following suggested project layout `cmd`, `pkg`, `pkg/version` and easy to extend.
 - uses a makefile to drive the build and a dockerfile to build a docker image.
 - uses `embed` to package web resources to one binary file
 
-[英文](README.md) | 中文
+
 基于 Go 1.16 使用 Embed 嵌入 web 静态资源， 目录约定:
 
 ```
