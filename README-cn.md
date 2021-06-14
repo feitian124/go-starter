@@ -12,11 +12,13 @@ This is a skeleton project for a go application, espeically web application, whi
 基于 Go 1.16 使用 Embed 嵌入 web 静态资源， 目录约定:
 
 ```
-go-embed
-└── web -- 前端项目，这里使用 vitejs + vues
-     ├── dist -- 生产环境打包目录
+go-starter
+└── web -- web app，here use vitejs + vue3 for example
+     ├── dist -- product build output
+     ├── build.go -- embed.FS
      ├── ...
-├── main.go -- 后端入口，这里使用 gin
+└── cmd
+     ├── main.go -- backend enry，here use gin for exmple
 ├── ...
 ```
 

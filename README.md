@@ -13,8 +13,10 @@ folder structure:
 go-starter
 └── web -- web app，here use vitejs + vue3 for example
      ├── dist -- product build output
+     ├── build.go -- embed.FS
      ├── ...
-├── main.go -- backend enry，here use gin for exmple
+└── cmd
+     ├── main.go -- backend enry，here use gin for exmple
 ├── ...
 ```
 
