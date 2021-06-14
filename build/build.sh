@@ -34,7 +34,7 @@ fi
 export CGO_ENABLED=0
 export GOARCH="${ARCH}"
 export GOOS="${OS}"
-export GO111MODULE=
+export GO111MODULE=on
 export GOPROXY=https://goproxy.io,direct
 
 go install                                                      \
