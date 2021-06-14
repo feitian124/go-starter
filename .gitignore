@@ -38,6 +38,7 @@ cover.out
 .idea
 .idea/*
 bin/
+.go/
 
 vendor
 
@@ -45,3 +46,4 @@ vendor
 snake
 go-embed
 config/config.yaml
+
