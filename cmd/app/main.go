@@ -16,7 +16,7 @@ func setupRouter() *gin.Engine {
 	}
 	r.StaticFS("/assets/", http.FS(assets))
 
-	index, err := fs.Sub(web.Assets,"dist")
+	index, err := fs.Sub(web.Assets, "dist")
 	if err != nil {
 		panic(err)
 	}
