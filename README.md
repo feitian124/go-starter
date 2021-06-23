@@ -1,7 +1,5 @@
 # go-starter
 
-english | [中文](README-cn.md)
-
 This is a skeleton project for a go application, espeically web application, which captures the best practise including:
 
 - following suggested project layout `cmd`, `internal` and easy to extend.  
