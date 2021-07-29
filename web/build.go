@@ -1,7 +1,7 @@
 package web
 
 import (
-"embed"
+	"embed"
 )
 
 //go:embed dist/*

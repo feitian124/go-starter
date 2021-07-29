@@ -1,11 +1,13 @@
 # go-starter
 
-english | [中文](README-cn.md)
-
 This is a skeleton project for a go application, espeically web application, which captures the best practise including:
 
-- following suggested project layout `cmd`, `pkg`, `pkg/version`, `internal` and easy to extend.
+- following suggested project layout `cmd`, `internal` and easy to extend.  
+   there are some discussions about if `pkg` should be used, see [issue #1](https://github.com/feitian124/go-starter/issues/1).
+   if you prefer less folder nest, please ignore it; if you want your main folder more clean, you can use it.
+
 - uses a makefile to drive the build and a dockerfile to build a docker image.
+
 - uses `embed` to package web resources to one binary file
 
 folder structure:
@@ -18,6 +20,35 @@ go-starter
 └── cmd
      ├── main.go -- backend enry，here use gin for exmple
 ├── ...
+```
+
+## start
+1. git clone https://github.com/feitian124/go-starter
+
+2. build web
+```shell
+cd web/
+yarn
+yarn build
+cd ..
+```
+
+this will generate web product build to web/dist
+
+3. start go server, **including the web**!
+```shell
+± |main ✓| → go run cmd/app/main.go 
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /assets/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /assets/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] GET    /                         --> main.setupRouter.func1 (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+
 ```
 
 ## Building
