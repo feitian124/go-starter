@@ -13,11 +13,14 @@ func Test_assert(t *testing.T) {
 		{"c.Assert(stmtEvictedElement.beginTime, Equals, now)",
 			&AssertResult{caller: "c", actual: "stmtEvictedElement.beginTime", checker: "Equals", expect: "now"},
 		},
+		{"  c.Assert(stmtEvictedElement.beginTime(), Equals, now1) ",
+			&AssertResult{caller: "c", actual: "stmtEvictedElement.beginTime()", checker: "Equals", expect: "now1"},
+		},
 	}
 
 	for _, v := range table {
 		x, err := assert(v.line)
 		require.NoError(t, err)
-		require.Equal(t, x, v.result)
+		require.Equal(t, v.result, x)
 	}
 }
