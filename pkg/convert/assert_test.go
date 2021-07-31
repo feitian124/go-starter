@@ -110,3 +110,40 @@ func TestIsTrue(t *testing.T) {
 		require.Equal(t, v.result, x)
 	}
 }
+
+func TestIsFalse(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{"c.Assert(os.IsNotExist(err), IsFalse)",
+			&AssertResult{match: true, caller: "c", actual: "os.IsNotExist(err)", checker: "IsFalse", expect: ""},
+		},
+		{`c.Assert(tk.HasPlan(queryList, "Batch_Point_Get"), IsFalse) `,
+			&AssertResult{match: true, caller: "c", actual: `tk.HasPlan(queryList, "Batch_Point_Get")`, checker: "IsFalse"},
+		},
+	}
+
+	for _, v := range table {
+		x, err := IsFalse(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
+
+func TestGreater(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{" c.Assert(tk.Se.GetSessionVars().StmtCtx.MemTracker.MaxConsumed(), Greater, int64(0)) ",
+			&AssertResult{match: true, caller: "c", actual: "tk.Se.GetSessionVars().StmtCtx.MemTracker.MaxConsumed()", checker: "Greater", expect: "int64(0)"},
+		},
+	}
+
+	for _, v := range table {
+		x, err := Greater(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
