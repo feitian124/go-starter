@@ -73,3 +73,40 @@ func TestIsNil(t *testing.T) {
 		require.Equal(t, v.result, x)
 	}
 }
+
+func TestNotNil(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{"c.Assert(err, NotNil)",
+			&AssertResult{match: true, caller: "c", actual: "err", checker: "NotNil", expect: ""},
+		},
+	}
+
+	for _, v := range table {
+		x, err := NotNil(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
+
+func TestIsTrue(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{"c.Assert(os.IsNotExist(err), IsTrue)",
+			&AssertResult{match: true, caller: "c", actual: "os.IsNotExist(err)", checker: "IsTrue", expect: ""},
+		},
+		{`c.Assert(tk.HasPlan(queryList, "Batch_Point_Get"), IsTrue) `,
+			&AssertResult{match: true, caller: "c", actual: `tk.HasPlan(queryList, "Batch_Point_Get")`, checker: "IsTrue"},
+		},
+	}
+
+	for _, v := range table {
+		x, err := IsTrue(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
