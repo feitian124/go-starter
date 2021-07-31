@@ -31,3 +31,45 @@ func TestEquals(t *testing.T) {
 	}
 }
 
+func TestDeepEquals(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{"c.Assert(stmtEvictedElement.beginTime, DeepEquals, now)",
+			&AssertResult{match: true, caller: "c", actual: "stmtEvictedElement.beginTime", checker: "DeepEquals", expect: "now"},
+		},
+		{"c.Assert(stmtEvictedElement.beginTime, Greater, now)",
+			&AssertResult{match: false, caller: "", actual: "", checker: "", expect: ""},
+		},
+		{"  c.Assert(stmtEvictedElement.beginTime(), DeepEquals, now1) ",
+			&AssertResult{match: true, caller: "c", actual: "stmtEvictedElement.beginTime()", checker: "DeepEquals", expect: "now1"},
+		},
+		{`c.Assert(getAllEvicted(ssbde), DeepEquals, "{begin: 5, end: 6, count: 1}, {begin: 1, end: 2, count: 2}")`,
+			&AssertResult{match: true, caller: "c", actual: "getAllEvicted(ssbde)", checker: "DeepEquals", expect: `"{begin: 5, end: 6, count: 1}, {begin: 1, end: 2, count: 2}"`},
+		},
+	}
+
+	for _, v := range table {
+		x, err := DeepEquals(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
+
+func TestIsNil(t *testing.T) {
+	table := []struct {
+		line   string
+		result *AssertResult
+	}{
+		{"c.Assert(err, IsNil)",
+			&AssertResult{match: true, caller: "c", actual: "err", checker: "IsNil", expect: ""},
+		},
+	}
+
+	for _, v := range table {
+		x, err := IsNil(v.line)
+		require.NoError(t, err)
+		require.Equal(t, v.result, x)
+	}
+}
