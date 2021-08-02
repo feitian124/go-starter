@@ -35,7 +35,7 @@ func ProcessFile(file string)  {
 	s := bufio.NewScanner(f)
 	for s.Scan() {
 		line := s.Text()
-		//line = process(line)
+		line, _ = ProcessLine(line)
 		fmt.Println(line)
 	}
 	err = s.Err()
@@ -46,8 +46,50 @@ func ProcessFile(file string)  {
 
 func ProcessLine(line string) (string, error) {
 	if strings.Contains(line, ".Assert(") {
-		if strings.Contains(line, " Equals,") {
+		if strings.Contains(line, " Equals") {
 			r, err := Equals(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " DeepEquals") {
+			r, err := DeepEquals(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " IsNil") {
+			r, err := IsNil(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " NotNil") {
+			r, err := NotNil(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " IsTrue") {
+			r, err := IsTrue(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " IsFalse") {
+			r, err := IsFalse(line)
+			if err != nil {
+				return "process equals has error", err
+			}
+			return r.expect + r.actual, nil
+		}
+		if strings.Contains(line, " Greater") {
+			r, err := Greater(line)
 			if err != nil {
 				return "process equals has error", err
 			}
