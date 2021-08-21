@@ -30,8 +30,9 @@ func TestRoundInt(t *testing.T) {
 		{"-6", args{1, -2012}, 0},
 		// too slow
 		{"-7", args{1, -201299999999999}, 0},
-		// constant 18446744073709551615 overflows int64
-		// {"out of range", args{18446744073709551615, -19}, 2},
+		{"-8", args{9223372036854775808, -3}, 9223372036854776000},
+		{"unsigned int range and overflow", args{9223372036854775808, -3}, 0},
+		{"out of range", args{18446744073709551615, -19}, 0},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
