@@ -1,6 +1,9 @@
 package mathx
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 func TestRoundInt(t *testing.T) {
 	type args struct {
@@ -21,10 +24,11 @@ func TestRoundInt(t *testing.T) {
 		{"-2", args{-2146213728964879326, -15}, -2146000000000000000},
 		{"-3", args{-123456789, -5}, -123500000},
 		{"-4", args{-50, -2}, -100},
+		{"-5", args{-150, -2}, -200},
 		{"-5", args{-150, 2}, -150},
 		{"-6", args{1, -2012}, 0},
 		// too slow
-		{"-6", args{1, -201299999999999}, 0},
+		{"-7", args{1, -201299999999999}, 0},
 		// constant 18446744073709551615 overflows int64
 		// {"out of range", args{18446744073709551615, -19}, 2},
 	}
@@ -34,5 +38,13 @@ func TestRoundInt(t *testing.T) {
 				t.Errorf("RoundInt() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func BenchmarkRoundInt(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		in := rand.Int63()
+		dec := rand.Int()
+		RoundInt(in, dec)
 	}
 }

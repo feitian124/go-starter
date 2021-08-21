@@ -9,14 +9,11 @@ func RoundInt(i int64, dec int) int64 {
 	if dec >= 0 {
 		return i
 	}
-	// The integer part of a fraction
-	shift := math.Pow10(dec)
-	intPart := math.Round(float64(i) * shift)
-	r := int64(intPart)
-	// the zero part
-	for i := 1; i <= -dec; i++ {
-		println("test hook, ming, r=", r, "i=", i, ", -dec=", -dec)
-		r *= 10
-	}
-	return r
+	//any digits in excess of 30 (or -30) are truncated as per mysql manual
+	//if dec < -30 {
+	//	dec = -30
+	//}
+	shift := math.Pow10(-dec)
+	intPart := math.Round(float64(i) / shift)
+	return int64(intPart) * int64(shift)
 }
