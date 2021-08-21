@@ -3,6 +3,7 @@ package mathx
 import (
 	"math/rand"
 	"testing"
+	"time"
 )
 
 func TestRoundInt(t *testing.T) {
@@ -42,9 +43,10 @@ func TestRoundInt(t *testing.T) {
 }
 
 func BenchmarkRoundInt(b *testing.B) {
+	rand.Seed(time.Now().Unix())
 	for i := 0; i < b.N; i++ {
 		in := rand.Int63()
-		dec := rand.Int()
-		RoundInt(in, dec)
+		dec := rand.Intn(100)
+		RoundInt(in, -dec)
 	}
 }
