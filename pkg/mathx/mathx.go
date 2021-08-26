@@ -1,6 +1,9 @@
 package mathx
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 // RoundInt rounds the argument i to dec decimal places using "round half up" rule.
 // dec defaults to 0 if not specified. dec can be negative
@@ -13,9 +16,23 @@ func RoundInt(i int64, dec int) int64 {
 	//if dec < -30 {
 	//	dec = -30
 	//}
-	shift := math.Pow10(-dec)
-	intPart := math.Round(float64(i) / shift)
-	return int64(intPart) * int64(shift)
+
+	// 取整数部分, 12345 -> 12300
+	shift := int64(math.Pow10(-dec))
+	x := i / shift * shift
+	fmt.Printf("%+v", x)
+
+	// 取剩余部分, 12345 -> 45
+	y := i - x
+
+	// 判断剩余部分第一位是否大于 5, 4 < 5
+	xx := y * 10 / shift
+	fmt.Printf("%+v", xx)
+	if xx >= 5 || x <= -5 {
+		x += shift
+	}
+
+	return x
 }
 
 // Transcribed from Postgres' src/port/rint.c, with c-style comments preserved
