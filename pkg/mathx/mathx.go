@@ -22,10 +22,10 @@ func RoundInt(i int64, dec int) int64 {
 	x := i / shift * shift
 	fmt.Printf("%+v", x)
 
-	// 取剩余部分, 12345 -> 45
+	// 取剩余部分, 12345 - 12300 = 45
 	y := i - x
 
-	// 判断剩余部分第一位是否大于 5, 4 < 5
+	// 判断剩余部分第一位是否大于 5, 45 * 10 / 100 = 4
 	xx := y * 10 / shift
 	fmt.Printf("%+v", xx)
 	if xx >= 5 || x <= -5 {
